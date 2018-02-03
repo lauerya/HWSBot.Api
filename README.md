@@ -1,2 +1,2 @@
-# HWSBot.Api
-scrapes prices off hws
+# HWSBot
+Bot to scrape prices off HWS
