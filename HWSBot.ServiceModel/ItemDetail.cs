@@ -9,5 +9,6 @@ namespace HWSBot.ServiceModel
         public string Date { get; set; }
         public string Item { get; set; }
         public string Author { get; set; }
+        public string Url { get; set; }
     }
 }

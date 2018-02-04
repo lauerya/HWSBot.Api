@@ -32,6 +32,7 @@ namespace HWSBot.Repositories
                 item.Date = reader["Date"] as string;
                 item.Item = reader["Items"] as string;
                 item.Price = reader["Price"] as string;
+                item.Url = reader["Url"] as string;
                 
                 itemDetailList.Add(item);
             }
