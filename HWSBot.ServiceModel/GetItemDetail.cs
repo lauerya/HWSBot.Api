@@ -10,6 +10,6 @@ namespace HWSBot.ServiceModel
     [Route("/Reddit/ItemDetail/")]
     public class GetItemDetail: IReturn<List<ItemDetail>>
     {
-        public string Query { get; set; }
+        public string Item { get; set; }
     }
 }

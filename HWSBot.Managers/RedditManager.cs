@@ -2,6 +2,7 @@
 using HWSBot.ServiceModel;
 using HWSBot.Repositories;
 using System.Collections.Generic;
+using ServiceStack.FluentValidation;
 
 namespace HWSBot.Managers
 {
@@ -23,6 +24,7 @@ namespace HWSBot.Managers
         public List<ItemDetail> GetItemDetail(string request)
         {
             List<ItemDetail> itemDetailList;
+            if(request == null) { throw new ValidationException("No query term included"); }
             itemDetailList = _repository.GetItemDetail(request);
             return itemDetailList;
         }

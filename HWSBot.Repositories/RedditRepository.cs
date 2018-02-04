@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace HWSBot.Repositories
 {
@@ -11,6 +12,7 @@ namespace HWSBot.Repositories
 
         public List<ItemDetail> GetItemDetail(string request)
         {
+            string format = "ddd, MMM/dd/yyyy";
             List<ItemDetail> itemDetailList;
             ItemDetail item;
             itemDetailList = new List<ItemDetail>();
@@ -24,13 +26,13 @@ namespace HWSBot.Repositories
             var reader = myCommand.ExecuteReader();
             while (reader.Read())
             {
-                item = new ItemDetail()
-                {
-                    Author = reader["Name"] as string,
-                    Date = DateTimeOffset.Parse(reader["Date"] as string),
-                    Item = reader["Item"] as string,
-                    Price = (List<string>)reader["Price"]
-                };
+                item = new ItemDetail();
+
+                item.Author = reader["Name"] as string;
+                item.Date = reader["Date"] as string;
+                item.Item = reader["Items"] as string;
+                item.Price = reader["Price"] as string;
+                
                 itemDetailList.Add(item);
             }
             reader.Close();
