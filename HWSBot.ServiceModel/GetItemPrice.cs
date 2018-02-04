@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ServiceStack;
+﻿using ServiceStack;
 
 namespace HWSBot.ServiceModel
 {
-    [Route("/Price/{Item}")]
+    [Route("/Reddit/Price/{Item}")]
     public class GetItemPrice : IReturn<PriceResponse>
     {
         public string Item { get; set; }

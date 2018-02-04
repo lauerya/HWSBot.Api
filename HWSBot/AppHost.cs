@@ -1,6 +1,8 @@
 ﻿using Funq;
 using ServiceStack;
 using HWSBot.ServiceInterface;
+using System.Web.Http.Cors;
+using System.Web.Http;
 
 namespace HWSBot
 {
@@ -13,6 +15,7 @@ namespace HWSBot
         public AppHost()
             : base("HWSBot", typeof(MyServices).Assembly) { }
 
+
         /// <summary>
         /// Application specific configuration
         /// This method should initialize any IoC resources utilized by your web service classes.
@@ -20,8 +23,13 @@ namespace HWSBot
         public override void Configure(Container container)
         {
             //Config examples
-            //this.Plugins.Add(new PostmanFeature());
-            //this.Plugins.Add(new CorsFeature());
+            this.Plugins.Add(new PostmanFeature());
+            Plugins.Add(new CorsFeature(
+    allowOriginWhitelist: new[] {
+      "http://localhost", "http://localhost:3000"
+       },
+    allowCredentials: true,
+    allowedHeaders: "Content-Type, Allow, Authorization"));
         }
     }
-}
+}  

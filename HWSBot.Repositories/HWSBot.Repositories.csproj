@@ -34,10 +34,6 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RedditSharp, Version=1.1.12.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RedditSharp.1.1.12\lib\Net45\RedditSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ServiceStack, Version=4.5.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ServiceStack.4.5.8\lib\net45\ServiceStack.dll</HintPath>
       <Private>True</Private>
@@ -74,6 +70,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HWSBot.ServiceModel\HWSBot.ServiceModel.csproj">
+      <Project>{53E82AC1-DD1D-4C66-B55F-F9F4ACFB2F40}</Project>
+      <Name>HWSBot.ServiceModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

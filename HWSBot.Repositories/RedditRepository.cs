@@ -1,61 +1,46 @@
-﻿using RedditSharp.Things;
+﻿using HWSBot.ServiceModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HWSBot.Repositories
 {
     public class RedditRepository
     {
-        public void AddToDatabase(Post post, string items, List<string> price)
-        {
-            String.Join(String.Empty, price);
+        string connectionString = "Data Source=DESKTOP-G3VPCBF;Initial Catalog=HardwareSwap;Integrated Security=True";
 
-            string connectionString = "Data Source=DESKTOP-JQ72B37;Initial Catalog=HWSBot;Integrated Security=True";
+        public List<ItemDetail> GetItemDetail(string request)
+        {
+            List<ItemDetail> itemDetailList;
+            ItemDetail item;
+            itemDetailList = new List<ItemDetail>();
             SqlConnection myConnection = new SqlConnection(connectionString);
 
+            SqlCommand myCommand = new SqlCommand("dbo.ReadPost", myConnection);
+            myCommand.CommandType = System.Data.CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@SearchTerm", request);                    
             myConnection.Open();
 
-            SqlCommand myCommand = new SqlCommand("INSERT INTO HWSBotTable", myConnection);
-            myCommand.Parameters.AddWithValue("@Name", post.AuthorName);
-            myCommand.Parameters.AddWithValue("@Items", items);
-            myCommand.Parameters.AddWithValue("@Date", post.Created);
-            myCommand.Parameters.AddWithValue("@Price", price);
-
-            myCommand.ExecuteNonQuery();
+            var reader = myCommand.ExecuteReader();
+            while (reader.Read())
+            {
+                item = new ItemDetail()
+                {
+                    Author = reader["Name"] as string,
+                    Date = DateTimeOffset.Parse(reader["Date"] as string),
+                    Item = reader["Item"] as string,
+                    Price = (List<string>)reader["Price"]
+                };
+                itemDetailList.Add(item);
+            }
+            reader.Close();
+            return itemDetailList;
         }
-        public bool ValueExistsInDatabase(string val)
+
+        public string GetItemPrice(string item)
         {
-            SqlCommand find_item = new SqlCommand("SELECT TOP 1 FROM products WHERE products.id = ?");
-            if (find_item == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-
+            throw new NotImplementedException();
         }
 
-        public void WriteToFile(Post post, string items, List<string> price)
-        {
-            string combindedPrice = string.Join(",", price.ToArray());
-            string directory = Environment.CurrentDirectory + "WriteLines.txt";
-
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(directory, true))
-            {
-                file.WriteLine("");
-                file.WriteLine("Flair: " + post.LinkFlairText);
-                file.WriteLine("Name: " + post.AuthorName);
-                file.WriteLine("Date: " + post.Created);
-                file.WriteLine("Items: " + items);
-                file.WriteLine("Prices: " + combindedPrice);
-            }
-        }
     }
 }
