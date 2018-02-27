@@ -26,10 +26,10 @@ namespace HWSBot
             this.Plugins.Add(new PostmanFeature());
             Plugins.Add(new CorsFeature(
     allowOriginWhitelist: new[] {
-      "http://localhost", "http://localhost:3000"
+      "http://localhost", "http://localhost:3000", "http://localhost:4200"
        },
     allowCredentials: true,
     allowedHeaders: "Content-Type, Allow, Authorization"));
         }
     }
-}  
+}   

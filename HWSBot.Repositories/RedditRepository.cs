@@ -33,6 +33,7 @@ namespace HWSBot.Repositories
                 item.Item = reader["Items"] as string;
                 item.Price = reader["Price"] as string;
                 item.Url = reader["Url"] as string;
+                item.Text = reader["Text"] as string;
                 
                 itemDetailList.Add(item);
             }
