@@ -17,7 +17,7 @@ namespace HWSBot.ServiceInterface
         }
         public List<ItemDetail> Post(GetItemDetail request)
         {
-            return _manager.GetItemDetail(request.Item);
+            return _manager.GetItemDetail(request.Subreddit, request.Item);
         }
     }
 }

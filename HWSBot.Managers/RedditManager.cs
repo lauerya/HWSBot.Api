@@ -21,11 +21,25 @@ namespace HWSBot.Managers
             return response;
         }
 
-        public List<ItemDetail> GetItemDetail(string request)
+        public List<ItemDetail> GetItemDetail(string subreddit, string request)
         {
             List<ItemDetail> itemDetailList;
             if(request == null) { throw new ValidationException("No query term included"); }
-            itemDetailList = _repository.GetItemDetail(request);
+            switch (subreddit)
+            {
+                case "hardwareswap":
+                    itemDetailList = _repository.GetAllItemDetail(request, "dbo.ReadHardwareSwapPost");
+                    break;
+                case "mechmarket":
+                    itemDetailList = _repository.GetAllItemDetail(request, "dbo.ReadMechMarketPost");
+                    break;
+                case "appleswap":
+                    itemDetailList = _repository.GetAllItemDetail(request, "dbo.ReadAppleSwapPost");
+                    break;
+                default:
+                    itemDetailList = _repository.GetAllItemDetail(request, "dbo.ReadPost");
+                    break;
+            }
             return itemDetailList;
         }
     }
