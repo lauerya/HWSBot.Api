@@ -3,6 +3,7 @@ using HWSBot.ServiceModel;
 using HWSBot.Repositories;
 using System.Collections.Generic;
 using ServiceStack.FluentValidation;
+using HWSBot.ServiceModel.Types;
 
 namespace HWSBot.Managers
 {

@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EbayManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedditManager.cs" />
   </ItemGroup>
@@ -72,6 +73,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HWSBot.Interfaces\HWSBot.Interfaces.csproj">
+      <Project>{a2f6864f-bf18-452e-8927-806925ee5b88}</Project>
+      <Name>HWSBot.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HWSBot.Repositories\HWSBot.Repositories.csproj">
       <Project>{1A0B378E-3EDB-4409-960D-6B5AAE0E995B}</Project>
       <Name>HWSBot.Repositories</Name>

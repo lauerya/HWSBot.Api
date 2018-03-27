@@ -84,6 +84,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HWSBot.Interfaces\HWSBot.Interfaces.csproj">
+      <Project>{A2F6864F-BF18-452E-8927-806925EE5B88}</Project>
+      <Name>HWSBot.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HWSBot.Managers\HWSBot.Managers.csproj">
       <Project>{C43FC98B-2C57-4B9D-8A73-0FD2B091453F}</Project>
       <Name>HWSBot.Managers</Name>

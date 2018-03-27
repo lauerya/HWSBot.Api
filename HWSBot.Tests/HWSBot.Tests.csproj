@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -67,10 +68,24 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntegrationTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EbayRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HWSBot.Interfaces\HWSBot.Interfaces.csproj">
+      <Project>{A2F6864F-BF18-452E-8927-806925EE5B88}</Project>
+      <Name>HWSBot.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HWSBot.Managers\HWSBot.Managers.csproj">
+      <Project>{C43FC98B-2C57-4B9D-8A73-0FD2B091453F}</Project>
+      <Name>HWSBot.Managers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HWSBot.Repositories\HWSBot.Repositories.csproj">
+      <Project>{1A0B378E-3EDB-4409-960D-6B5AAE0E995B}</Project>
+      <Name>HWSBot.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HWSBot.ServiceInterface\HWSBot.ServiceInterface.csproj">
       <Project>{801a0f89-d5f6-49a6-bcea-6624388c98a4}</Project>
       <Name>HWSBot.ServiceInterface</Name>

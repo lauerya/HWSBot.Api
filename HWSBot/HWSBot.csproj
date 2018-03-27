@@ -102,6 +102,18 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HWSBot.Interfaces\HWSBot.Interfaces.csproj">
+      <Project>{A2F6864F-BF18-452E-8927-806925EE5B88}</Project>
+      <Name>HWSBot.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HWSBot.Managers\HWSBot.Managers.csproj">
+      <Project>{C43FC98B-2C57-4B9D-8A73-0FD2B091453F}</Project>
+      <Name>HWSBot.Managers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HWSBot.Repositories\HWSBot.Repositories.csproj">
+      <Project>{1A0B378E-3EDB-4409-960D-6B5AAE0E995B}</Project>
+      <Name>HWSBot.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HWSBot.ServiceInterface\HWSBot.ServiceInterface.csproj">
       <Project>{801a0f89-d5f6-49a6-bcea-6624388c98a4}</Project>
       <Name>HWSBot.ServiceInterface</Name>

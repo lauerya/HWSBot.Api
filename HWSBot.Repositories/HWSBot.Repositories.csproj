@@ -55,6 +55,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EbayRepository.cs" />
     <Compile Include="RedditRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,6 +74,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HWSBot.Interfaces\HWSBot.Interfaces.csproj">
+      <Project>{A2F6864F-BF18-452E-8927-806925EE5B88}</Project>
+      <Name>HWSBot.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HWSBot.ServiceModel\HWSBot.ServiceModel.csproj">
       <Project>{53E82AC1-DD1D-4C66-B55F-F9F4ACFB2F40}</Project>
       <Name>HWSBot.ServiceModel</Name>
