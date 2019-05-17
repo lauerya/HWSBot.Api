@@ -24,7 +24,7 @@ namespace HWSBot.ServiceInterface
         {
             return _manager.GetItemPrice(request.Item);
         }
-        public List<ItemDetail> Post(GetItemDetail request)
+        public List<Post> Post(GetItemDetail request)
         {
             return _manager.GetItemDetail(request.Subreddit, request.Item);
         }

@@ -22,9 +22,9 @@ namespace HWSBot.Managers
             return response;
         }
 
-        public List<ItemDetail> GetItemDetail(string subreddit, string request)
+        public List<Post> GetItemDetail(string subreddit, string request)
         {
-            List<ItemDetail> itemDetailList;
+            List<Post> itemDetailList;
             if(request == null) { throw new ValidationException("No query term included"); }
             switch (subreddit)
             {

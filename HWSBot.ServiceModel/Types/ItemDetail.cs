@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HWSBot.ServiceModel
+﻿namespace HWSBot.ServiceModel
 {
-    public class ItemDetail
+    public class Post
     {
+        public int PostId { get; set; }
         public string Price { get; set; }
         public string Date { get; set; }
         public string Item { get; set; }

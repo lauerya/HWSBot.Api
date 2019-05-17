@@ -10,11 +10,11 @@ namespace HWSBot.Repositories
     {
         string connectionString = "Data Source=DESKTOP-G3VPCBF;Initial Catalog=HardwareSwap;Integrated Security=True";
 
-        public List<ItemDetail> GetAllItemDetail(string request, string sproc)
+        public List<Post> GetAllItemDetail(string request, string sproc)
         {
-            List<ItemDetail> itemDetailList;
-            ItemDetail item;
-            itemDetailList = new List<ItemDetail>();
+            List<Post> itemDetailList;
+            Post item;
+            itemDetailList = new List<Post>();
             SqlConnection myConnection = new SqlConnection(connectionString);
 
             SqlCommand myCommand = new SqlCommand(sproc, myConnection);
@@ -25,7 +25,7 @@ namespace HWSBot.Repositories
             var reader = myCommand.ExecuteReader();
             while (reader.Read())
             {
-                item = new ItemDetail();
+                item = new Post();
 
                 item.Author = reader["Name"] as string;
                 item.Date = reader["Date"] as string;

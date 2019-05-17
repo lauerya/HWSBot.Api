@@ -67,6 +67,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="IEbayManager.cs" />
     <Compile Include="IEbayRepository.cs" />
+    <Compile Include="IHardwareSwapRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

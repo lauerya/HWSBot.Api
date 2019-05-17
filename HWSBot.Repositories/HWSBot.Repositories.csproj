@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EbayRepository.cs" />
+    <Compile Include="HardwareSwapRepository.cs" />
     <Compile Include="RedditRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

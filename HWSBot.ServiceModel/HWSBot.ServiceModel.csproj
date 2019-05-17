@@ -65,11 +65,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ebay\GetCompletedItem.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="GetItemDetail.cs" />
     <Compile Include="GetItemPrice.cs" />
     <Compile Include="Types\EbayItemDetail.cs" />
     <Compile Include="Types\ItemDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\Product.cs" />
+    <Compile Include="Types\ProductCriteria.cs" />
+    <Compile Include="Types\ProductPost.cs" />
+    <Compile Include="Types\ProductStore.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
