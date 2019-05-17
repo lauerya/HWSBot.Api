@@ -4,8 +4,6 @@ using HWSBot.ServiceModel.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HWSBot.Managers
 {
@@ -26,7 +24,9 @@ namespace HWSBot.Managers
             string[] stringSplit;
             int rank;
 
-            productPostList = _hardwareSwapRepository.GetProductPostList(product.ProductId);
+            productPostList = _hardwareSwapRepository.GetProductPostList(product);
+            PopulateProductPostList(productPostList);
+
             postList = _hardwareSwapRepository.GetNewPostList(product.LastPostId);
             
             if (postList == null || postList.Count == 0)
@@ -71,6 +71,12 @@ namespace HWSBot.Managers
             product.LastPostId = postList.Last().PostId;
 
             return productPostList;
+        }
+
+        private void PopulateProductPostList(List<ProductPost> productPostList)
+        {
+            _hardwareSwapRepository.GetBatchPostList(productPostList.Select(pp => pp.Post.PostId).ToList());
+
         }
 
         private bool ShouldProductSearchPost(Product product, Post post)
