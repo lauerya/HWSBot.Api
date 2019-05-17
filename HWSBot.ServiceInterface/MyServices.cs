@@ -41,6 +41,11 @@ namespace HWSBot.ServiceInterface
             return _hardwareSwapManager.GetUsersProductList(request.UserId);
         }
 
+        public Product Get(GetProduct request)
+        {
+            return _hardwareSwapManager.GetProduct(request.ProductId);
+        }
+
         public List<ProductPost> Get(GetProductPostList request)
         {
             return _hardwareSwapManager.GetProductPostList(request.ProductId);

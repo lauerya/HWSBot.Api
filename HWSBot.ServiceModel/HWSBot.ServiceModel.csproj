@@ -68,6 +68,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="GetItemDetail.cs" />
     <Compile Include="GetItemPrice.cs" />
+    <Compile Include="GetProduct.cs" />
     <Compile Include="GetProductPostList.cs" />
     <Compile Include="GetUsersProductList.cs" />
     <Compile Include="MatchProductPostProcess.cs" />

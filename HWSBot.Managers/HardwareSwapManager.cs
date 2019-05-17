@@ -28,11 +28,8 @@ namespace HWSBot.Managers
         {
             List<ProductPost> productPostList;
             Product product;
-
-            product = new Product();
-            product.ProductId = productId;
-
-            PopulateProductDetails(product);
+            
+            product = GetProduct(productId);
             productPostList = _hardwareSwapRepository.GetProductPostList(product);
             PopulateProductPostList(productPostList);
 
@@ -50,17 +47,22 @@ namespace HWSBot.Managers
             }
         }
 
-        private void PopulateProductDetails(Product product)
-        {
-            product.ProductCriteriaList = _hardwareSwapRepository.GetProductCriteriaList(product.ProductId);
-            product.StoreList = _hardwareSwapRepository.GetProductStoreList(product.ProductId);
-        }
-
         public Product GetProduct(int productId)
         {
-            return _hardwareSwapRepository.GetProduct(productId);
-        }
+            Product product;
 
+            product = _hardwareSwapRepository.GetProduct(productId);
+
+            if (product == null)
+            {
+                throw new System.Exception("Product not found");
+            }
+
+            product.ProductCriteriaList = _hardwareSwapRepository.GetProductCriteriaList(product.ProductId);
+            product.StoreList = _hardwareSwapRepository.GetProductStoreList(product.ProductId);
+            return product;
+        }
+        
         public List<Post> GetNewPostList(int? lastPostId)
         {
             return _hardwareSwapRepository.GetNewPostList(lastPostId);
