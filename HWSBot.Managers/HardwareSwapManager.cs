@@ -55,5 +55,27 @@ namespace HWSBot.Managers
             product.ProductCriteriaList = _hardwareSwapRepository.GetProductCriteriaList(product.ProductId);
             product.StoreList = _hardwareSwapRepository.GetProductStoreList(product.ProductId);
         }
+
+        public Product GetProduct(int productId)
+        {
+            return _hardwareSwapRepository.GetProduct(productId);
+        }
+
+        public List<Post> GetNewPostList(int? lastPostId)
+        {
+            return _hardwareSwapRepository.GetNewPostList(lastPostId);
+        }
+
+        public void Save(List<ProductPost> productPostList)
+        {
+            _hardwareSwapRepository.Save(productPostList);
+        }
+
+        public void Save(Product product)
+        {
+            _hardwareSwapRepository.Save(product);
+            _hardwareSwapRepository.Save(product.ProductCriteriaList);
+            _hardwareSwapRepository.Save(product.StoreList);
+        }
     }
 }

@@ -51,5 +51,12 @@ namespace HWSBot.ServiceInterface
             _matchManager.MatchProductPost(request.ProductId);
             return new ResponseStatus();
         }
+
+        public ResponseStatus Post(Product product)
+        {
+            _hardwareSwapManager.Save(product);
+
+            return new ResponseStatus();
+        }
     }
 }

@@ -8,11 +8,11 @@ namespace HWSBot.Managers
 {
     public class MatchManager : IMatchManager
     {
-        private readonly IHardwareSwapRepository _hardwareSwapRepository;
+        private readonly IHardwareSwapManager _hardwareSwapManager;
 
-        public MatchManager(IHardwareSwapRepository hardwareSwapRepository)
+        public MatchManager(IHardwareSwapManager hardwareSwapManager)
         {
-            _hardwareSwapRepository = hardwareSwapRepository;
+            _hardwareSwapManager = hardwareSwapManager;
         }
 
         public void MatchProductPost(int productId)
@@ -24,8 +24,8 @@ namespace HWSBot.Managers
             string[] stringSplit;
             int rank;
             int saveCounter = 0;
-            product = _hardwareSwapRepository.GetProduct(productId);
-            postList = _hardwareSwapRepository.GetNewPostList(product.LastPostId);
+            product = _hardwareSwapManager.GetProduct(productId);
+            postList = _hardwareSwapManager.GetNewPostList(product.LastPostId);
 
             if (postList == null || postList.Count == 0)
             {
@@ -71,16 +71,16 @@ namespace HWSBot.Managers
 
                 if (saveCounter > 100)
                 {
-                    _hardwareSwapRepository.Save(productPostList);
-                    _hardwareSwapRepository.Save(product);
+                    _hardwareSwapManager.Save(productPostList);
+                    _hardwareSwapManager.Save(product);
 
                     productPostList = new List<ProductPost>();
                     saveCounter = 0;
                 }
             }
 
-            _hardwareSwapRepository.Save(productPostList);
-            _hardwareSwapRepository.Save(product);
+            _hardwareSwapManager.Save(productPostList);
+            _hardwareSwapManager.Save(product);
         }
 
         private bool ShouldProductSearchPost(Product product, Post post)

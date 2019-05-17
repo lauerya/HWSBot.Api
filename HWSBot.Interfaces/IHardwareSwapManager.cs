@@ -1,4 +1,5 @@
-﻿using HWSBot.ServiceModel.Types;
+﻿using HWSBot.ServiceModel;
+using HWSBot.ServiceModel.Types;
 using System.Collections.Generic;
 
 namespace HWSBot.Interfaces
@@ -7,5 +8,9 @@ namespace HWSBot.Interfaces
     {
         List<Product> GetUsersProductList(int userId);
         List<ProductPost> GetProductPostList(int productId);
+        Product GetProduct(int productId);
+        List<Post> GetNewPostList(int? lastPostId);
+        void Save(List<ProductPost> productPostList);
+        void Save(Product product);
     }
 }

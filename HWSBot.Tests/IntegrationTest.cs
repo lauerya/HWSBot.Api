@@ -30,7 +30,7 @@ namespace HWSBot.Tests
         
             ebayManager = new EbayManager(ebayRepository);
 
-            service = new MyServices(ebayManager);
+            service = new MyServices(ebayManager, null, null);
             GetEbayCompletedItem request = new GetEbayCompletedItem();
             request.Item = "Pixel 2 xl";
 

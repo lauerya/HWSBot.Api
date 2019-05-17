@@ -112,7 +112,7 @@ namespace HWSBot.Repositories
 
                 productPost.Post = new Post();
                 productPost.Post.PostId = int.Parse(reader["PostID"].ToString());
-                
+
                 productPost.Product = product;
 
                 productPost.HasBeenRead = bool.Parse(reader["HasBeenRead"].ToString());
@@ -232,5 +232,128 @@ namespace HWSBot.Repositories
             reader.Close();
             return productList;
         }
+
+        public void Save(List<ProductPost> productPostList)
+        {
+            DataTable dataTable;
+
+            dataTable = new DataTable();
+            dataTable.Columns.Add("ProductPostId");
+            dataTable.Columns.Add("ProductId");
+            dataTable.Columns.Add("PostId");
+            dataTable.Columns.Add("TotalRank");
+            dataTable.Columns.Add("HasBeenRead");
+
+            foreach (ProductPost productPost in productPostList)
+            {
+                dataTable.Rows.Add(
+                    productPost.ProductPostId,
+                    productPost.Product.ProductId,
+                    productPost.Post.PostId,
+                    productPost.TotalRank,
+                    productPost.HasBeenRead);
+            }
+
+            SqlConnection myConnection = new SqlConnection(connectionString);
+
+            SqlCommand myCommand = new SqlCommand("dbo.MergeProductPost", myConnection);
+            myCommand.CommandType = System.Data.CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@ProductPostType", dataTable);
+            myConnection.Open();
+            
+            myCommand.ExecuteNonQuery();
+        }
+
+        public void Save(Product product)
+        {
+            DataTable dataTable;
+
+            dataTable = new DataTable();
+            dataTable.Columns.Add("ProductId");
+            dataTable.Columns.Add("Name");
+            dataTable.Columns.Add("CreateByUserId");
+            dataTable.Columns.Add("RankThreshold");
+            dataTable.Columns.Add("PriceThreshold");
+            dataTable.Columns.Add("LastPostId");
+
+            dataTable.Rows.Add(
+                    product.ProductId,
+                    product.Name,
+                    product.CreateByUserId,
+                    product.RankThreshold,
+                    product.PriceThreshold,
+                    product.LastPostId);
+            
+
+            SqlConnection myConnection = new SqlConnection(connectionString);
+
+            SqlCommand myCommand = new SqlCommand("dbo.MergeProduct", myConnection);
+            myCommand.CommandType = System.Data.CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@ProductType", dataTable);
+            myConnection.Open();
+
+            myCommand.ExecuteNonQuery();
+        }
+
+        public void Save(List<ProductStore> storeList)
+        {
+            DataTable dataTable;
+
+            dataTable = new DataTable();
+            dataTable.Columns.Add("ProductStoreId");
+            dataTable.Columns.Add("StoreTypeId");
+            dataTable.Columns.Add("ProductId");
+            dataTable.Columns.Add("StoreCategory");
+
+            foreach (ProductStore productStore in storeList)
+            {
+                dataTable.Rows.Add(
+                    productStore.ProductStoreId,
+                    (int)productStore.StoreType,
+                    productStore.ProductId,
+                    productStore.Category);
+            }
+
+            SqlConnection myConnection = new SqlConnection(connectionString);
+
+            SqlCommand myCommand = new SqlCommand("dbo.MergeProductStore", myConnection);
+            myCommand.CommandType = System.Data.CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@ProductStoreType", dataTable);
+            myConnection.Open();
+
+            myCommand.ExecuteNonQuery();
+        }
+
+        public void Save(List<ProductCriteria> productCriteriaList)
+        {
+            DataTable dataTable;
+
+            dataTable = new DataTable();
+            dataTable.Columns.Add("ProductCriteriaId");
+            dataTable.Columns.Add("Value");
+            dataTable.Columns.Add("Rank");
+            dataTable.Columns.Add("ProductId");
+
+            foreach (ProductCriteria productCriteria in productCriteriaList)
+            {
+                dataTable.Rows.Add(
+                    productCriteria.ProductCriteriaId,
+                    productCriteria.Value,
+                    productCriteria.Rank,
+                    productCriteria.ProductId);
+            }
+
+            SqlConnection myConnection = new SqlConnection(connectionString);
+
+            SqlCommand myCommand = new SqlCommand("dbo.MergeProductCriteria", myConnection);
+            myCommand.CommandType = System.Data.CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@ProductCriteriaType", dataTable);
+            myConnection.Open();
+
+            myCommand.ExecuteNonQuery();
+        }
+
+
+        //NICK save stuff
     }
 }

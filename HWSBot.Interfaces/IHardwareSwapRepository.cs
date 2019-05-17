@@ -15,5 +15,7 @@ namespace HWSBot.Interfaces
         List<Product> SearchUserProductList(int userId);
         void Save(List<ProductPost> productPostList);
         void Save(Product product);
+        void Save(List<ProductStore> storeList);
+        void Save(List<ProductCriteria> productCriteriaList);
     }
 }

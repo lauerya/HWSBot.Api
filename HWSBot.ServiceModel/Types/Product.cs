@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using ServiceStack;
+using System.Collections.Generic;
 
 namespace HWSBot.ServiceModel.Types
 {
+    [Route(path:"/Product", verbs:"POST")]
     public class Product
     {
         public int ProductId { get; set; }
