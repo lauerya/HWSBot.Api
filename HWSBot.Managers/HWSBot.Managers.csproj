@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HardwareSwapManager.cs" />
     <Compile Include="MatchManager.cs" />
     <Compile Include="EbayManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

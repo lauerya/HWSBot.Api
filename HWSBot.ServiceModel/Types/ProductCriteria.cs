@@ -5,5 +5,6 @@
         public int ProductCriteriaId { get; set; }
         public string Value { get; set; }
         public int Rank { get; set; }
+        public int ProductId { get; set; }
     }
 }

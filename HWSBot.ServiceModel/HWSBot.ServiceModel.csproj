@@ -68,6 +68,9 @@
     <Compile Include="Enums.cs" />
     <Compile Include="GetItemDetail.cs" />
     <Compile Include="GetItemPrice.cs" />
+    <Compile Include="GetProductPostList.cs" />
+    <Compile Include="GetUsersProductList.cs" />
+    <Compile Include="MatchProductPostProcess.cs" />
     <Compile Include="Types\EbayItemDetail.cs" />
     <Compile Include="Types\ItemDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

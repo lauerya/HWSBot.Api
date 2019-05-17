@@ -3,11 +3,10 @@ using HWSBot.ServiceModel;
 using HWSBot.ServiceModel.Types;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace HWSBot.Managers
 {
-    public class MatchManager
+    public class MatchManager : IMatchManager
     {
         private readonly IHardwareSwapRepository _hardwareSwapRepository;
 
@@ -16,23 +15,23 @@ namespace HWSBot.Managers
             _hardwareSwapRepository = hardwareSwapRepository;
         }
 
-        public List<ProductPost> GetProductPostList(Product product)
+        public void MatchProductPost(int productId)
         {
             List<ProductPost> productPostList;
             List<Post> postList;
             ProductPost productPost;
+            Product product;
             string[] stringSplit;
             int rank;
-
-            productPostList = _hardwareSwapRepository.GetProductPostList(product);
-            PopulateProductPostList(productPostList);
-
+            int saveCounter = 0;
+            product = _hardwareSwapRepository.GetProduct(productId);
             postList = _hardwareSwapRepository.GetNewPostList(product.LastPostId);
-            
+
             if (postList == null || postList.Count == 0)
             {
-                return null;
+                return;
             }
+            productPostList = new List<ProductPost>();
 
             foreach (Post post in postList)
             {
@@ -40,6 +39,7 @@ namespace HWSBot.Managers
                 {
                     continue;
                 }
+                saveCounter++;
                 rank = 0;
 
                 foreach (ProductCriteria productCriteria in product.ProductCriteriaList)
@@ -51,7 +51,7 @@ namespace HWSBot.Managers
                         continue;
                     }
 
-                    for (int i = 1; i <= stringSplit.Length - 1; i++)
+                    for (int i = 1; i <= stringSplit.Length - 1 && i < 5; i++)
                     {
                         rank += productCriteria.Rank / i;
                     }
@@ -67,16 +67,20 @@ namespace HWSBot.Managers
                 productPost.TotalRank = rank;
 
                 productPostList.Add(productPost);
+                product.LastPostId = post.PostId;
+
+                if (saveCounter > 100)
+                {
+                    _hardwareSwapRepository.Save(productPostList);
+                    _hardwareSwapRepository.Save(product);
+
+                    productPostList = new List<ProductPost>();
+                    saveCounter = 0;
+                }
             }
-            product.LastPostId = postList.Last().PostId;
 
-            return productPostList;
-        }
-
-        private void PopulateProductPostList(List<ProductPost> productPostList)
-        {
-            _hardwareSwapRepository.GetBatchPostList(productPostList.Select(pp => pp.Post.PostId).ToList());
-
+            _hardwareSwapRepository.Save(productPostList);
+            _hardwareSwapRepository.Save(product);
         }
 
         private bool ShouldProductSearchPost(Product product, Post post)

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ServiceStack;
-using HWSBot.ServiceModel;
+﻿using HWSBot.Interfaces;
 using HWSBot.Managers;
-using HWSBot.ServiceModel.Types;
+using HWSBot.ServiceModel;
 using HWSBot.ServiceModel.Ebay;
-using HWSBot.Interfaces;
+using HWSBot.ServiceModel.Types;
+using ServiceStack;
+using System.Collections.Generic;
 
 namespace HWSBot.ServiceInterface
 {
@@ -15,10 +12,16 @@ namespace HWSBot.ServiceInterface
     {
         RedditManager _manager = new RedditManager();
         IEbayManager _ebayManager;
+        private readonly IHardwareSwapManager _hardwareSwapManager;
+        private readonly IMatchManager _matchManager;
 
-        public MyServices(IEbayManager ebayManager)
+        public MyServices(IEbayManager ebayManager,
+                          IHardwareSwapManager hardwareSwapManager,
+                          IMatchManager matchManager)
         {
             _ebayManager = ebayManager;
+            _hardwareSwapManager = hardwareSwapManager;
+            _matchManager = matchManager;
         }
         public PriceResponse Post(GetItemPrice request)
         {
@@ -31,6 +34,22 @@ namespace HWSBot.ServiceInterface
         public SearchResult Get(GetEbayCompletedItem request)
         {
             return _ebayManager.GetEbayCompletedItem(request.Item);
+        }
+
+        public List<Product> Get(GetUsersProductList request)
+        {
+            return _hardwareSwapManager.GetUsersProductList(request.UserId);
+        }
+
+        public List<ProductPost> Get(GetProductPostList request)
+        {
+            return _hardwareSwapManager.GetProductPostList(request.ProductId);
+        }
+
+        public ResponseStatus Get(MatchProductPostProcess request)
+        {
+            _matchManager.MatchProductPost(request.ProductId);
+            return new ResponseStatus();
         }
     }
 }

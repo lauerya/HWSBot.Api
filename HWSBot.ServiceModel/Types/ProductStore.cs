@@ -4,7 +4,7 @@
     {
         public int ProductStoreId { get; set; }
         public int ProductId { get; set; }
-        public StoreType StoreTypeId { get; set; }
+        public StoreType StoreType { get; set; }
         public string Category { get; set; }
     }
 }
